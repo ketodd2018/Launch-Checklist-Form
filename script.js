@@ -26,37 +26,46 @@ window.addEventListener("load", function(){
          alert("One or more fields missing required entry.");
           event.preventDefault();
       };
-      if (isNaN(fuel.value)=== true || isNaN(weight.value)=== true){
-         alert("Fuel and Weight must be numbers");
+      if (isNaN(fuel.value)=== true || isNaN(weight.value)=== true || isNaN(name.value)=== false || isNaN(copilot.value)=== false){
+         alert("Please check that all fields have valid entries.");
          event.preventDefault();
       };
       if (Number(fuel.value)<10000){
          let faultyStatus = document.getElementById("launchStatusCheck");
          faultyStatus.innerHTML=`
-         <h2 id="launchStatus" style="color:red">Shuttle not ready for launch</h2>
-            <div  id="faultyItems" style="visibility:visible">
+         <h2 id="launchStatus">Shuttle not ready for launch</h2>
+            <div  id="faultyItems">
                <ol>
                   <li id="pilotStatus">Pilot ${name.value} Ready</li>
                   <li id="copilotStatus">Co-pilot ${copilot.value} Ready</li>
                   <li id="fuelStatus">Fuel level ${fuel.value} not high enough for launch</li>
          `
+         let launchStatus = document.getElementById("launchStatus")
+         launchStatus.style.color = "red";
+         let faultyItems = document.getElementById("faultyItems");
+         faultyItems.style.visibility = "visible";   
          event.preventDefault()
       }else if (Number(weight.value)>10000){
          let faultyStatus = document.getElementById("launchStatusCheck");
          faultyStatus.innerHTML=`
-         <h2 id="launchStatus" style="color:red">Shuttle not ready for launch</h2>
-            <div  id="faultyItems" style="visibility:visible">
+         <h2 id="launchStatus">Shuttle not ready for launch</h2>
+            <div  id="faultyItems">
                <ol>
                   <li id="pilotStatus">Pilot ${name.value} Ready</li>
                   <li id="copilotStatus">Co-pilot ${copilot.value} Ready</li>
                   <li id="fuelStatus">Fuel level high enough for launch</li>
                   <li id="cargoStatus">Cargo mass ${weight.value} not low enough for launch</li>
          `
-            event.preventDefault()
+         let launchStatus = document.getElementById("launchStatus")
+         launchStatus.style.color = "red";
+         let faultyItems = document.getElementById("faultyItems");
+         faultyItems.style.visibility = "visible";   
+         event.preventDefault()
       }else{
          let faultyStatus = document.getElementById("launchStatusCheck");
+         faultyStatus.style.color = "green"
          faultyStatus.innerHTML=`
-         <h2 id="launchStatus" style="color:green">Shuttle is ready for launch.</h2>
+         <h2 id="launchStatus">Shuttle is ready for launch.</h2>
          `
          event.preventDefault()       
          }
